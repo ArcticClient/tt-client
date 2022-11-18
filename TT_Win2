@@ -1,0 +1,3 @@
+#port init ic 3002
+#action {^<PORT> %0} {#Arctic %0}
+#sess Arctic mud.arctic.org 2700 Arctic

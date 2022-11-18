@@ -1,0 +1,49 @@
+#CONFIG {AUTO TAB} {5000}
+#CONFIG {BUFFER SIZE} {10000}
+#CONFIG {CHARSET} {UTF-8}
+#CONFIG {COLOR MODE} {TRUE}
+#CONFIG {COLOR PATCH} {OFF}
+#CONFIG {COMMAND COLOR} {\e[0;37m}
+#CONFIG {COMMAND ECHO} {ON}
+#CONFIG {CONNECT RETRY} {0.0}
+#CONFIG {HISTORY SIZE} {1000}
+#CONFIG {LOG MODE} {RAW}
+#CONFIG {MOUSE} {OFF}
+#CONFIG {PACKET PATCH} {AUTO OFF}
+#CONFIG {RANDOM SEED} {1441108941}
+#CONFIG {REPEAT CHAR} {!}
+#CONFIG {SCREEN READER} {OFF}
+#CONFIG {SCROLL LOCK} {ON}
+#CONFIG {SPEEDWALK} {OFF}
+#CONFIG {TAB WIDTH} {8}
+#CONFIG {TELNET} {ON}
+#CONFIG {TINTIN CHAR} {#}
+#CONFIG {VERBATIM} {OFF}
+#CONFIG {VERBATIM CHAR} {\}
+#CONFIG {VERBOSE} {OFF}
+#CONFIG {WORDWRAP} {ON}
+
+#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
+#alias setscreen {opt col $cols;#unticker screenupdate;};
+#config speedwalk on
+#config buffer_size 1000000
+#CONFIG {REPEAT ENTER} {ON}
+#config {color patch} {on}
+#alias {a1} {#session Arctic mud.arctic.org 2700}
+#alias {t} {#ic a}
+#alias {f} {#ic b}
+#read TINTIN_Arctic_Actions.txt
+#read Arctic_Aliases.txt
+#read TINTIN_Arctic_Highlights_Subs.txt
+
+#PATHDIR {d} {u} {32}
+#PATHDIR {e} {w} {2}
+#PATHDIR {n} {s} {1}
+#PATHDIR {ne} {sw} {3}
+#PATHDIR {nw} {se} {9}
+#PATHDIR {s} {n} {4}
+#PATHDIR {se} {nw} {6}
+#PATHDIR {sw} {ne} {12}
+#PATHDIR {u} {d} {16}
+#PATHDIR {w} {e} {8}
+
