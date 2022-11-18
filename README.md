@@ -12,7 +12,7 @@ Welcome to Arctic and enjoy your stay.
 # Introduction
 Arctic has now been updated to use full ANSI coloring. TinTin++ and JMC are
 the recommended MUD clients of choice as they support extended colours.
-Instructions for using TinTin++ are available in a separate repository.
+Instructions for using JMC are available in a separate repository.
 
 Within this package, you will find comments on what the cause is for each
 highlight, trigger, and substitution. Please review these messages as they 
