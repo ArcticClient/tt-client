@@ -23,8 +23,9 @@
 #CONFIG {VERBOSE} {OFF}
 #CONFIG {WORDWRAP} {ON}
 
+#split 10
 #event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
-#alias setscreen {opt col $cols;#unticker screenupdate;};
+#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
 #config speedwalk on
 #config buffer_size 1000000
 #CONFIG {REPEAT ENTER} {ON}
@@ -46,4 +47,39 @@
 #PATHDIR {sw} {ne} {12}
 #PATHDIR {u} {d} {16}
 #PATHDIR {w} {e} {8}
+
+#CLASS window kill;
+#CLASS window open
+   #screen get cols cols;
+	#VARIABLE {window}
+   {
+       {1} {}
+       {2} {}
+       {3} {}
+       {4} {}
+       {5} {}
+       {6} {}
+       {7} {}
+       {8} {}
+       {9} {}
+       {10} {}
+       {11} {}
+   };
+
+#ALIAS {commwindow}
+{
+    #list window del 1;
+    #list window ins -1 {%0};
+    #draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
+};
+
+#ALIAS {redraw}
+{
+   #showme Redrawing Tintin++ windows.;
+   #draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
+};
+
+#ACTION {^{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{.+}{\>|\*|}} {commwindow %1%2%3%4};
+
+#class window close;
 
