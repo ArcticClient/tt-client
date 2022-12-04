@@ -1,3 +1,5 @@
+#class actions kill
+#class actions open
 #nop Generic triggers. Automatic eat/drink, tick resets, coin loot and split, stand when bashed
 #action {^You are thirsty.}                                                  {drink all.water}
 #action {^You are hungry. }                                                  {eat all.food}
@@ -53,3 +55,4 @@
 #nop #action {^%0 pants heavily.}                                            {flap %0}
 #nop Ocean scout
 #nop #action {^%0 pants heavily.}                                            {surge %0}
+#class actions close

@@ -1,3 +1,5 @@
+#class aliases kill
+#class aliases open
 #nop Generic
 #alias {brewscribe} {rest;brew 'cure light';scribe 'cu l';stand}
 #alias {comp}       {get all.component;put all.component pouch}
@@ -306,3 +308,4 @@
 #alias {wb}         {cast 'water breath'}
 #alias {wither}     {cast 'wither'}
 #alias {wr}         {cast 'white rune'}
+#class aliases close
