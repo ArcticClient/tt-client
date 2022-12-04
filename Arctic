@@ -28,7 +28,7 @@
 #alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
 #config speedwalk on
 #config buffer_size 1000000
-#CONFIG {REPEAT ENTER} {ON}
+#CONFIG {REPEAT ENTER} {OFF}
 #config {color patch} {on}
 #alias {a1} {#session Arctic mud.arctic.org 2700}
 #alias {t} {#ic a}
