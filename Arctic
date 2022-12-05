@@ -81,7 +81,7 @@
    #draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
 };
 
-#ACTION {^{?!Format|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
+#ACTION {^{?!Format|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
 	#format {time} {%t} {%H:%M};
 	commwindow $time: %1%2%3%4
 };
