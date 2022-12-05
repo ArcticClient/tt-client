@@ -33,6 +33,8 @@
 #alias {a1} {#session Arctic mud.arctic.org 2700}
 #alias {t} {#ic a}
 #alias {f} {#ic b}
+#var hungrycommand {eat all.food};
+#var thirstycommand {drink all.water};
 #read TINTIN_Arctic_Actions.txt
 #read Arctic_Aliases.txt
 #read TINTIN_Arctic_Highlights_Subs.txt
@@ -102,14 +104,53 @@
 				#if {"%2" == ""}
 					{
 					#showme {};
-					#showme Thirsty trigger command is \"$thirstycommand\;
-					#showme Change this with \"arctic thirsty <command>\;
+					#if {"$thirstycommand" != "#nop"} #showme Thirsty trigger command is \"$thirstycommand\";
+					#else	#showme Thirsty trigger command is disabled.;
+					#showme Change this with \"arctic thirsty <command>\" or \"arctic thirsty off\" to disable.;
+					};
+				#elseif {"%2" == "off"}
+					{
+					#showme {};
+					#showme Disabling thirsty trigger.;
+					#var thirstycommand {#nop};
+					#line gag;
+					#write Preferences;
 					};
 				#else
 					{
 					#format thirstycommand {%p} {%2 %3 %4 %5};
 					#showme {};
 					#showme New thirsty command is "$thirstycommand";
+					#line gag;
+					#write Preferences;
+					};
+				};
+			};
+		#case "hungry"
+			{
+			#switch {%2}
+				{
+				#if {"%2" == ""}
+					{
+					#showme {};
+					#if {"$hungrycommand" != "#nop"} #showme Hungry trigger command is \"$hungrycommand\";
+					#else	#showme Hungry trigger command is disabled.;
+					#showme Change this with \"arctic hungry <command>\" or \"arctic hungry off\" to disable.;
+					};
+				#elseif {"%2" == "off"}
+					{
+					#showme {};
+					#showme Disabling hungry trigger.;
+					#var hungrycommand {#nop};
+					#line gag;
+					#write Preferences;
+					};
+				#else
+					{
+					#format hungrycommand {%p} {%2 %3 %4 %5};
+					#showme {};
+					#showme New hungry command is "$hungrycommand";
+					#line gag;
 					#write Preferences;
 					};
 				};
