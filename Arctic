@@ -1,3 +1,7 @@
+#nop Nothing in this file needs manual editing.;
+#nop Put manual overrides in your Preferences file.;
+
+#nop Default Tintin configuration;
 #CONFIG {AUTO TAB} {5000}
 #CONFIG {BUFFER SIZE} {10000}
 #CONFIG {CHARSET} {UTF-8}
@@ -22,24 +26,6 @@
 #CONFIG {VERBATIM CHAR} {\}
 #CONFIG {VERBOSE} {OFF}
 #CONFIG {WORDWRAP} {ON}
-
-#split 10
-#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
-#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
-#config speedwalk on
-#config buffer_size 1000000
-#CONFIG {REPEAT ENTER} {OFF}
-#config {color patch} {on}
-#alias {a1} {#session Arctic mud.arctic.org 2700}
-#alias {t} {#ic a}
-#alias {f} {#ic b}
-#var hungrycommand {eat all.food};
-#var thirstycommand {drink all.water};
-#var ticker {1};
-#read TINTIN_Arctic_Actions.txt
-#read Arctic_Aliases.txt
-#read TINTIN_Arctic_Highlights_Subs.txt
-
 #PATHDIR {d} {u} {32}
 #PATHDIR {e} {w} {2}
 #PATHDIR {n} {s} {1}
@@ -50,7 +36,33 @@
 #PATHDIR {sw} {ne} {12}
 #PATHDIR {u} {d} {16}
 #PATHDIR {w} {e} {8}
+#config speedwalk on
+#config buffer_size 1000000
+#nop End default TinTin configuration;
 
+#nop Setup defaults for Arctic scripts;
+#nop You do not need to edit these manually;
+#split 10
+#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
+#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
+#CONFIG {REPEAT ENTER} {OFF}
+#config {color patch} {on}
+#alias {a1} {#session Arctic mud.arctic.org 2700}
+#alias {t} {#ic a}
+#alias {f} {#ic b}
+#var hungrycommand {eat all.food};
+#var thirstycommand {drink all.water};
+#var ticker {1};
+#var usealiases {1};
+#var useactions {1};
+#var usesubs {1};
+#read Preferences;
+#if {&usealiases && $usealiases == 1} #read Arctic_Aliases.txt;
+#if {&useactions && $useactions == 1} #read TINTIN_Arctic_Actions.txt;
+#if {&usesubs && $usesubs == 1} #read TINTIN_Arctic_Highlights_Subs.txt;
+#nop End defaults for Arctic Scripts;
+
+#nop Messaging window and actions to capure tells, etc;
 #CLASS window kill;
 #CLASS window open
    #screen get cols cols;
@@ -180,12 +192,16 @@
 				#showme {};
 				#showme {Enabling Arctic aliases.};
 				#read Arctic_Aliases.txt;
+				#var usealiases 1;
+				#write Preferences;
 				};
 			#else
 				{
 				#showme {};
 				#showme {Disabling Arctic aliases.};
 				#class aliases kill;
+				#var usealiases 0;
+				#write Preferences;
 				};
 			};
 		#case "actions"
@@ -195,12 +211,16 @@
 				#showme {};
 				#showme {Enabling Arctic actions.};
 				#read TINTIN_Arctic_Actions.txt;
+				#var useactions 1;
+				#write Preferences;
 				};
 			#else
 				{
 				#showme {};
 				#showme {Disabling Arctic actions.};
 				#class actions kill;
+				#var useactions 0;
+				#write Preferences;
 				};
 			};
 		#case "subs"
@@ -210,12 +230,16 @@
 				#showme {};
 				#showme {Enabling Arctic substitions and highlights.};
 				#read TINTIN_Arctic_Highlights_Subs.txt;
+				#var usesubs 1;
+				#write Preferences;
 				};
 			#else
 				{
 				#showme {};
 				#showme {Disabling Arctic substitutions and highlights.};
 				#class subs kill;
+				#var usesubs 0;
+				#write Preferences;
 				};
 			};
 		#default
