@@ -95,6 +95,25 @@
 	#class subs size subs_size;
 	#switch {"%1"}
 		{
+		#case "thirsty"
+			{
+			#switch {%2}
+				{
+				#if {"%2" == ""}
+					{
+					#showme {};
+					#showme Thirsty trigger command is \"$thirstycommand\;
+					#showme Change this with \"arctic thirsty <command>\;
+					};
+				#else
+					{
+					#format thirstycommand {%p} {%2 %3 %4 %5};
+					#showme {};
+					#showme New thirsty command is "$thirstycommand";
+					#write Preferences;
+					};
+				};
+			};
 		#case "aliases"
 			{
 			#if {$alias_size == 0}
@@ -160,3 +179,4 @@
 }
 
 #CLASS arctic close; 
+#READ Preferences
