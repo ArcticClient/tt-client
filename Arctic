@@ -86,3 +86,77 @@
 
 #class window close;
 
+#CLASS arctic kill;
+#CLASS arctic open;
+#ALIAS arctic
+{
+	#class aliases size alias_size;
+	#class actions size actions_size;
+	#class subs size subs_size;
+	#switch {"%1"}
+		{
+		#case "aliases"
+			{
+			#if {$alias_size == 0}
+				{
+				#showme {};
+				#showme {Enabling Arctic aliases.};
+				#read Arctic_Aliases.txt;
+				};
+			#else
+				{
+				#showme {};
+				#showme {Disabling Arctic aliases.};
+				#class aliases kill;
+				};
+			};
+		#case "actions"
+			{
+			#if {$actions_size == 0}
+				{
+				#showme {};
+				#showme {Enabling Arctic actions.};
+				#read TINTIN_Arctic_Actions.txt;
+				};
+			#else
+				{
+				#showme {};
+				#showme {Disabling Arctic actions.};
+				#class actions kill;
+				};
+			};
+		#case "subs"
+			{
+			#if {$subs_size == 0}
+				{
+				#showme {};
+				#showme {Enabling Arctic substitions and highlights.};
+				#read TINTIN_Arctic_Highlights_Subs.txt;
+				};
+			#else
+				{
+				#showme {};
+				#showme {Disabling Arctic substitutions and highlights.};
+				#class subs kill;
+				};
+			};
+		#default
+			{
+			#showme {};
+			#showme {Arctic scripts information:};
+			#if {$alias_size == 0} {#showme Aliases not loaded.};
+			#else {#showme Aliases loaded: $alias_size};
+			#if {$actions_size == 0} {#showme Actions not loaded.};
+			#else {#showme Actions loaded: $actions_size};
+			#if {$subs_size == 0} {#showme Highlights/Substitutions not loaded.};
+			#else {#showme Highlights/Substitutions loaded: $subs_size};
+			#showme {};
+			#showme {Syntax: arctic <aliases/actions/subs>};
+			};
+		};
+	#unvar alias_size;
+	#unvar actions_size;
+	#unvar subs_size;
+}
+
+#CLASS arctic close; 
