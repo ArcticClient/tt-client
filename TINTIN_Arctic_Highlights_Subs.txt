@@ -83,4 +83,8 @@
 #sub {%0 forces you to drop your weapon.}                             {--- YOU HAVE BEEN DISARMED. GET YOUR WEAPON AND WIELD ---}
 #sub {You succumb to the nightmare and fall into a deep, dark sleep.} {--- YOU ARE STUNNED! ---}
 #sub {You fall down, your ears ringing.}                              {--- YOU ARE STUNNED! ---}
+
+#highlight {You feel enlightened.} {light magenta}
+#highlight {You feel especially skillful today.} {light magenta}
+
 #class subs close
