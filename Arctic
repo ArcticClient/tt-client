@@ -213,7 +213,7 @@
 			#showme {};
 			#if {"$thirstycommand" != "#nop"} #showme Thirsty command: $thirstycommand;
 			#else #showme Thirsty trigger disabled;
-			#if {"$hungrycommand" != "$nop"} #showme Hungry command: $hungrycommand;
+			#if {"$hungrycommand" != "#nop"} #showme Hungry command: $hungrycommand;
 			#else #showme Hungry trigger disabled;
 			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty>};
 			};
