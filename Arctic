@@ -211,13 +211,24 @@
 			#if {$subs_size == 0} {#showme Highlights/Substitutions not loaded.};
 			#else {#showme Highlights/Substitutions loaded: $subs_size};
 			#showme {};
-			#showme {Syntax: arctic <aliases/actions/subs>};
+			#if {"$thirstycommand" != "#nop"} #showme Thirsty command: $thirstycommand;
+			#else #showme Thirsty trigger disabled;
+			#if {"$hungrycommand" != "$nop"} #showme Hungry command: $hungrycommand;
+			#else #showme Hungry trigger disabled;
+			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty>};
 			};
 		};
 	#unvar alias_size;
 	#unvar actions_size;
 	#unvar subs_size;
 }
+
+#act {^Welcome to the land of Krynn.} 
+{
+	#showme {};
+	#showme {<067>Welcome to the TinTin++ Arctic Scripts!<099>\r\n<067>Use the \"arctic\" command for script-specific configuration.<099>\r\n};
+	#showme {};
+};
 
 #CLASS arctic close; 
 #READ Preferences
