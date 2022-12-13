@@ -67,7 +67,7 @@
 #alias {y} {$second_char_command}
 #alias {f} {$both_chars_command}
 #var {second_char_alias} {y}
-#var {both_chars_alias} {f}
+#var {both_chars_alias} {v}
 
 #nop Messaging window and actions to capure tells, etc;
 #CLASS window kill;
