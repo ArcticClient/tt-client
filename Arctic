@@ -124,7 +124,7 @@
 				#case {""}
 					{
 					#showme \r\nCurrent alias to send commands to the second character is "$second_char_alias".\r\n;
-					}
+					};
 				#default
 					{
 					#showme \r\nChanging alias to send commands to the second character to "%2".;
@@ -132,9 +132,9 @@
 					#var second_char_alias {%2};
 					#alias {$second_char_alias} {$second_char_comand};
 					#write Preferences;
-					}
-				}
-			}
+					};
+				};
+			};
 		#case "both"
 			{
 			#switch {"%2"}
@@ -142,7 +142,7 @@
 				#case {""}
 					{
 					#showme \r\nCurrent alias to send commands to both characters simultaneously is "$both_chars_alias".\r\n;
-					}
+					};
 				#default
 					{
 					#showme \r\nChanging alias to send commands to both characters simultaneously to "%2".;
@@ -150,9 +150,9 @@
 					#var both_chars_alias {%2};
 					#alias {$both_chars_alias} {$both_chars_comand};
 					#write Preferences;
-					}
-				}
-			}
+					};
+				};
+			};
 		#case "ticker"
 			{
 			#if {$ticker == 1}
@@ -161,7 +161,7 @@
 				#showme Disabling 10-second tick warning.;
 				#var ticker 0;
 				#write Preferences;
-				}
+				};
 			#else
 				{
 				#showme {};
