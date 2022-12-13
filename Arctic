@@ -1,3 +1,7 @@
+#nop Nothing in this file needs manual editing.;
+#nop Put manual overrides in your Preferences file.;
+
+#nop Default Tintin configuration;
 #CONFIG {AUTO TAB} {5000}
 #CONFIG {BUFFER SIZE} {10000}
 #CONFIG {CHARSET} {UTF-8}
@@ -22,21 +26,6 @@
 #CONFIG {VERBATIM CHAR} {\}
 #CONFIG {VERBOSE} {OFF}
 #CONFIG {WORDWRAP} {ON}
-
-#split 10
-#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
-#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
-#config speedwalk on
-#config buffer_size 1000000
-#CONFIG {REPEAT ENTER} {OFF}
-#config {color patch} {on}
-#alias {a1} {#session Arctic mud.arctic.org 2700}
-#alias {t} {#ic a}
-#alias {f} {#ic b}
-#read TINTIN_Arctic_Actions.txt
-#read Arctic_Aliases.txt
-#read TINTIN_Arctic_Highlights_Subs.txt
-
 #PATHDIR {d} {u} {32}
 #PATHDIR {e} {w} {2}
 #PATHDIR {n} {s} {1}
@@ -47,7 +36,40 @@
 #PATHDIR {sw} {ne} {12}
 #PATHDIR {u} {d} {16}
 #PATHDIR {w} {e} {8}
+#config speedwalk on
+#config buffer_size 1000000
+#nop End default TinTin configuration;
 
+#nop Setup defaults for Arctic scripts;
+#nop You do not need to edit these manually;
+#split 10
+#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
+#event {SESSION ACTIVATED} {redraw;#showme "If you don't see anything here, you may need to hit PGUP and then PGDOWN to refresh the screen.";};
+#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
+#CONFIG {REPEAT ENTER} {OFF}
+#config {color patch} {on}
+#alias {a1} {#session Arctic mud.arctic.org 2700}
+#var hungrycommand {eat all.food};
+#var thirstycommand {drink all.water};
+#var ticker {1};
+#var usealiases {1};
+#var useactions {1};
+#var usesubs {1};
+#read Preferences;
+#if {&usealiases && $usealiases == 1} #read Arctic_Aliases.txt;
+#if {&useactions && $useactions == 1} #read TINTIN_Arctic_Actions.txt;
+#if {&usesubs && $usesubs == 1} #read TINTIN_Arctic_Highlights_Subs.txt;
+#nop End defaults for Arctic Scripts;
+
+#nop Aliases for controlling two characters
+#var {second_char_command} {#ic a}
+#var {both_chars_command} {#ic b}
+#alias {y} {$second_char_command}
+#alias {f} {$both_chars_command}
+#var {second_char_alias} {y}
+#var {both_chars_alias} {v}
+
+#nop Messaging window and actions to capure tells, etc;
 #CLASS window kill;
 #CLASS window open
    #screen get cols cols;
@@ -79,10 +101,223 @@
    #draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
 };
 
-#ACTION {^{?!Format|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
+#ACTION {^{?!Added|Format|Intersection|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
 	#format {time} {%t} {%H:%M};
 	commwindow $time: %1%2%3%4
 };
 
 #class window close;
 
+#CLASS arctic kill;
+#CLASS arctic open;
+#ALIAS arctic
+{
+	#class aliases size alias_size;
+	#class actions size actions_size;
+	#class subs size subs_size;
+	#switch {"%1"}
+		{
+		#case "second"
+			{
+			#switch {"%2"}
+				{
+				#case {""}
+					{
+					#showme \r\nCurrent alias to send commands to the second character is "$second_char_alias".\r\n;
+					};
+				#default
+					{
+					#showme \r\nChanging alias to send commands to the second character to "%2".;
+					#unalias {$second_char_alias};
+					#var second_char_alias {%2};
+					#alias {$second_char_alias} {$second_char_comand};
+					#write Preferences;
+					};
+				};
+			};
+		#case "both"
+			{
+			#switch {"%2"}
+				{
+				#case {""}
+					{
+					#showme \r\nCurrent alias to send commands to both characters simultaneously is "$both_chars_alias".\r\n;
+					};
+				#default
+					{
+					#showme \r\nChanging alias to send commands to both characters simultaneously to "%2".;
+					#unalias {$both_chars_alias};
+					#var both_chars_alias {%2};
+					#alias {$both_chars_alias} {$both_chars_comand};
+					#write Preferences;
+					};
+				};
+			};
+		#case "ticker"
+			{
+			#if {$ticker == 1}
+				{
+				#showme {};
+				#showme Disabling 10-second tick warning.;
+				#var ticker 0;
+				#write Preferences;
+				};
+			#else
+				{
+				#showme {};
+				#showme Enabling 10-second tick warning.;
+				#var ticker 1;
+				#write Preferences;
+				};
+			};
+		#case "thirsty"
+			{
+			#switch {%2}
+				{
+				#if {"%2" == ""}
+					{
+					#showme {};
+					#if {"$thirstycommand" != "#nop"} #showme Thirsty trigger command is \"$thirstycommand\";
+					#else	#showme Thirsty trigger command is disabled.;
+					#showme Change this with \"arctic thirsty <command>\" or \"arctic thirsty off\" to disable.;
+					};
+				#elseif {"%2" == "off"}
+					{
+					#showme {};
+					#showme Disabling thirsty trigger.;
+					#var thirstycommand {#nop};
+					#line gag;
+					#write Preferences;
+					};
+				#else
+					{
+					#format thirstycommand {%p} {%2 %3 %4 %5};
+					#showme {};
+					#showme New thirsty command is "$thirstycommand";
+					#line gag;
+					#write Preferences;
+					};
+				};
+			};
+		#case "hungry"
+			{
+			#switch {%2}
+				{
+				#if {"%2" == ""}
+					{
+					#showme {};
+					#if {"$hungrycommand" != "#nop"} #showme Hungry trigger command is \"$hungrycommand\";
+					#else	#showme Hungry trigger command is disabled.;
+					#showme Change this with \"arctic hungry <command>\" or \"arctic hungry off\" to disable.;
+					};
+				#elseif {"%2" == "off"}
+					{
+					#showme {};
+					#showme Disabling hungry trigger.;
+					#var hungrycommand {#nop};
+					#line gag;
+					#write Preferences;
+					};
+				#else
+					{
+					#format hungrycommand {%p} {%2 %3 %4 %5};
+					#showme {};
+					#showme New hungry command is "$hungrycommand";
+					#line gag;
+					#write Preferences;
+					};
+				};
+			};
+		#case "aliases"
+			{
+			#if {$alias_size == 0}
+				{
+				#showme {};
+				#showme {Enabling Arctic aliases.};
+				#read Arctic_Aliases.txt;
+				#var usealiases 1;
+				#write Preferences;
+				};
+			#else
+				{
+				#showme {};
+				#showme {Disabling Arctic aliases.};
+				#class aliases kill;
+				#var usealiases 0;
+				#write Preferences;
+				};
+			};
+		#case "actions"
+			{
+			#if {$actions_size == 0}
+				{
+				#showme {};
+				#showme {Enabling Arctic actions.};
+				#read TINTIN_Arctic_Actions.txt;
+				#var useactions 1;
+				#write Preferences;
+				};
+			#else
+				{
+				#showme {};
+				#showme {Disabling Arctic actions.};
+				#class actions kill;
+				#var useactions 0;
+				#write Preferences;
+				};
+			};
+		#case "subs"
+			{
+			#if {$subs_size == 0}
+				{
+				#showme {};
+				#showme {Enabling Arctic substitions and highlights.};
+				#read TINTIN_Arctic_Highlights_Subs.txt;
+				#var usesubs 1;
+				#write Preferences;
+				};
+			#else
+				{
+				#showme {};
+				#showme {Disabling Arctic substitutions and highlights.};
+				#class subs kill;
+				#var usesubs 0;
+				#write Preferences;
+				};
+			};
+		#default
+			{
+			#showme {};
+			#showme {Arctic scripts information:};
+			#if {$alias_size == 0} {#showme Aliases not loaded.};
+			#else {#showme Aliases loaded: $alias_size};
+			#if {$actions_size == 0} {#showme Actions not loaded.};
+			#else {#showme Actions loaded: $actions_size};
+			#if {$subs_size == 0} {#showme Highlights/Substitutions not loaded.};
+			#else {#showme Highlights/Substitutions loaded: $subs_size};
+			#showme {};
+			#if {"$thirstycommand" != "#nop"} #showme Thirsty command: $thirstycommand;
+			#else #showme Thirsty trigger disabled;
+			#if {"$hungrycommand" != "#nop"} #showme Hungry command: $hungrycommand;
+			#else #showme Hungry trigger disabled;
+			#if {&ticker && $ticker == 1} {#showme 10-second tick warning is enabled.};
+			#else #showme 10-second tick warning is disabled.;
+			#showme {Second character command: $second_char_alias};
+			#showme {Both characters command: $both_chars_alias};
+			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty/ticker/second/both>};
+			};
+		};
+	#unvar alias_size;
+	#unvar actions_size;
+	#unvar subs_size;
+}
+
+#act {^Welcome to the land of Krynn.} 
+{
+	#showme {};
+	#showme {<067>Welcome to the TinTin++ Arctic Scripts!<099>\r\n<067>Use the \"arctic\" command for script-specific configuration.<099>\r\n};
+	#showme {};
+};
+
+#CLASS arctic close; 
+#READ Preferences
