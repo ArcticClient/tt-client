@@ -65,7 +65,7 @@
 #var {second_char_command} {#ic a}
 #var {both_chars_command} {#ic b}
 #alias {y} {$second_char_command}
-#alias {f} {$both_chars_command}
+#alias {v} {$both_chars_command}
 #var {second_char_alias} {y}
 #var {both_chars_alias} {v}
 
