@@ -44,6 +44,7 @@
 #nop You do not need to edit these manually;
 #split 10
 #event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
+#event {SESSION ACTIVATED} {redraw;#showme "If you don't see anything here, you may need to hit PGUP and then PGDOWN to refresh the screen.";};
 #alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
 #CONFIG {REPEAT ENTER} {OFF}
 #config {color patch} {on}
