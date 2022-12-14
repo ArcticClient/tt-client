@@ -23,16 +23,22 @@
 #action {^There were %0 coins.}                                              {split %0}
 #nop Loss of fly spell on your character.
 #action {^You feel much heavier.}                                            {fly;fly}
+
+#nop autostand class
+#class autostand kill
+#class autostand open
 #nop This message is received when bashed.
-#action {^You are sent sprawling as %0 crashes into you.}                    {stand}
+#action {^You are sent sprawling as %0 crashes into you.}                    {#if {$autostand == 1} stand}
 #nop This message is received when charged and put into sitting position.
-#action {^%0 charges into you and knocks you to the ground.}                 {stand}
+#action {^%0 charges into you and knocks you to the ground.}                 {#if {$autostand == 1} stand}
 #nop This message is received when charged and put into sitting position (alternate messaging).
-#action {^%0 swings madly at you with %1, knocking you to the ground.}       {stand}
+#action {^%0 swings madly at you with %1, knocking you to the ground.}       {#if {$autostand == 1} stand}
 #nop This message is received when put into sitting position and lagged by the earthquake spell.
-#action {^You are thrown to the ground by the force of the earthquake.}      {stand}
+#action {^You are thrown to the ground by the force of the earthquake.}      {#if {$autostand == 1} stand}
 #nop This message is received when you are not delayed by a skill and have been able to stand up for a complete round.
-#action {^You should probably stand up!}                                     {cancel;stand}
+#action {^You should probably stand up!}                                     {#if {$autostand == 1} {cancel;stand}}
+#class autostand close
+
 #nop **WARNING** This is the same message you would receive if someone who is trying to kill you is summoning you.
 #action {^%0 has summoned you!}                                              {wake;stand;fly}
 #nop The list of the following are auto-refill water container triggers for all the main towns in the game.
