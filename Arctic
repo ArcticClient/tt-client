@@ -62,6 +62,9 @@
 #if {&usesubs && $usesubs == 1} #read TINTIN_Arctic_Highlights_Subs.txt;
 #nop End defaults for Arctic Scripts;
 
+#nop Fix for character creation
+#sub {(Y/N)} {(uppercase Y/N)}
+
 #nop Aliases for controlling two characters
 #var {second_char_command} {#ic a}
 #var {both_chars_command} {#ic b}
