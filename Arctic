@@ -352,7 +352,7 @@
 				};
 			#showme {Second character command: $second_char_alias};
 			#showme {Both characters command: $both_chars_alias};
-			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty/ticker/second/both>};
+			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty/ticker/second/both/autostand>};
 			};
 		};
 	#unvar alias_size;
