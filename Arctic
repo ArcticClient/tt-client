@@ -1,53 +1,29 @@
-#nop Nothing in this file needs manual editing.;
-#nop Put manual overrides in your Preferences file.;
-
-#nop Default Tintin configuration;
-#CONFIG {AUTO TAB} {5000}
-#CONFIG {BUFFER SIZE} {10000}
-#CONFIG {CHARSET} {UTF-8}
-#CONFIG {COLOR MODE} {TRUE}
-#CONFIG {COLOR PATCH} {OFF}
-#CONFIG {COMMAND COLOR} {\e[0;37m}
-#CONFIG {COMMAND ECHO} {ON}
-#CONFIG {CONNECT RETRY} {0.0}
-#CONFIG {HISTORY SIZE} {1000}
-#CONFIG {LOG MODE} {RAW}
-#CONFIG {MOUSE} {OFF}
-#CONFIG {PACKET PATCH} {AUTO OFF}
-#CONFIG {RANDOM SEED} {1441108941}
-#CONFIG {REPEAT CHAR} {!}
-#CONFIG {SCREEN READER} {OFF}
-#CONFIG {SCROLL LOCK} {ON}
-#CONFIG {SPEEDWALK} {OFF}
-#CONFIG {TAB WIDTH} {8}
-#CONFIG {TELNET} {ON}
-#CONFIG {TINTIN CHAR} {#}
-#CONFIG {VERBATIM} {OFF}
-#CONFIG {VERBATIM CHAR} {\}
-#CONFIG {VERBOSE} {OFF}
-#CONFIG {WORDWRAP} {ON}
-#PATHDIR {d} {u} {32}
-#PATHDIR {e} {w} {2}
-#PATHDIR {n} {s} {1}
-#PATHDIR {ne} {sw} {3}
-#PATHDIR {nw} {se} {9}
-#PATHDIR {s} {n} {4}
-#PATHDIR {se} {nw} {6}
-#PATHDIR {sw} {ne} {12}
-#PATHDIR {u} {d} {16}
-#PATHDIR {w} {e} {8}
-#config speedwalk on
-#config buffer_size 1000000
-#nop End default TinTin configuration;
+#nop NOTE: Nothing in this file needs manual editing.;
+#nop Put manual overrides in the Preferences file.;
 
 #nop Setup defaults for Arctic scripts;
-#nop You do not need to edit these manually;
-#split 10
-#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
-#event {SESSION ACTIVATED} {redraw;#showme "If you don't see anything here, you may need to hit PGUP and then PGDOWN to refresh the screen.";};
-#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
+#CLASS defaults kill;
+#CLASS defaults open;
 #CONFIG {REPEAT ENTER} {OFF}
-#config {color patch} {on}
+#nop This prevents multiple colors on one line from breaking color
+#CONFIG {COLOR PATCH} {on}
+#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
+#CLASS defaults close;
+#nop End default TinTin configuration;
+
+#nop This splits the screen to provide a messaging window at the top.
+#split 10;
+
+#class events kill;
+#class events open;
+#event {SCREEN RESIZE} {#screen get cols cols; #ticker screenupdate {setscreen} {2};};
+#event {SESSION ACTIVATED} {redraw;#showme {If you don't see anything here, you may need to hit PGUP and then PGDOWN to refresh the screen.};};
+#nop Messaging forwarding;
+#EVENT {SESSION DISCONNECTED} { #unvar sessionname; #write Preferences };
+#EVENT {SESSION CONNECTED} { #var sessionname {%0} };
+#class events close;
+
+#nop Defaults for Arctic Scripts;
 #alias {a1} {#session Arctic mud.arctic.org 2700}
 #var hungrycommand {eat all.food};
 #var thirstycommand {drink all.water};
@@ -62,13 +38,11 @@
 #if {&usesubs && $usesubs == 1} #read TINTIN_Arctic_Highlights_Subs.txt;
 #nop End defaults for Arctic Scripts;
 
-#nop Messaging forwarding
-#EVENT {SESSION DISCONNECTED} { #unvar sessionname; #write Preferences };
-#EVENT {SESSION CONNECTED} { #var sessionname {%0};};
-
 
 #nop Aliases for controlling two characters
 #nop This lets you send 'y' to the game as a prompt response if no argument is given.
+#class multi_commands kill;
+#class multi_commands open;
 #alias {second_char_command}
 {
 	#if { "%1" == "" } { #send $second_char_alias; };
@@ -79,6 +53,7 @@
 	#if { "%1" == "" } { #send $both_chars_alias; };
 	#else { #ic b %0 };
 };
+#class multi_commands close;
 #alias {y} {second_char_command}
 #alias {v} {$both_chars_command}
 #var {second_char_alias} {y}
@@ -120,7 +95,6 @@
 	#format {time} {%t} {%H:%M};
    #ats {commwindow $sessionname $time: %1%2%3%4};
 };
-
 #class window close;
 
 #CLASS arctic kill;
@@ -380,6 +354,7 @@
 	#showme {<067>Welcome to the TinTin++ Arctic Scripts!<099>\r\n<067>Use the \"arctic\" command for script-specific configuration.<099>\r\n};
 	#showme {};
 };
-
 #CLASS arctic close; 
+
+#nop Read Preferences last to overwrite any of the defaults set above.;
 #READ Preferences
