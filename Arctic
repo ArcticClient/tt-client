@@ -54,10 +54,10 @@
 	#else { #ic b %0 };
 };
 #class multi_commands close;
-#alias {y} {$second_char_command}
-#alias {v} {$both_chars_command}
-#var {second_char_alias} {y}
-#var {both_chars_alias} {v}
+#alias {y} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;$second_char_command};
+#alias {v} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;$both_chars_command};
+#var {second_char_alias} {y};
+#var {both_chars_alias} {v};
 
 #nop Messaging window and actions to capure tells, etc;
 #CLASS window kill;
@@ -141,7 +141,7 @@
 					#showme \r\nChanging alias to send commands to the second character to "%2".;
 					#unalias {$second_char_alias};
 					#var second_char_alias {%2};
-					#alias {$second_char_alias} {$second_char_comand};
+					#alias {$second_char_alias} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;$second_char_comand};
 					#write Preferences;
 					};
 				};
@@ -159,7 +159,7 @@
 					#showme \r\nChanging alias to send commands to both characters simultaneously to "%2".;
 					#unalias {$both_chars_alias};
 					#var both_chars_alias {%2};
-					#alias {$both_chars_alias} {$both_chars_comand};
+					#alias {$both_chars_alias} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;$both_chars_comand};
 					#write Preferences;
 					};
 				};
