@@ -54,7 +54,7 @@
 	#else { #ic b %0 };
 };
 #class multi_commands close;
-#alias {y} {second_char_command}
+#alias {y} {$second_char_command}
 #alias {v} {$both_chars_command}
 #var {second_char_alias} {y}
 #var {both_chars_alias} {v}
