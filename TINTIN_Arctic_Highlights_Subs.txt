@@ -1,26 +1,26 @@
 #class subs kill
 #class subs open
 #nop Generic highlights (disarms, enlightens, re-cast spells)
-#highlight {--- YOU HAVE BEEN DISARMED. GET YOUR WEAPON AND WIELD --- %1} {magenta}
+#highlight {--- YOU HAVE BEEN DISARMED. GET YOUR WEAPON AND WIELD ---} {magenta}
 #nop You've disrupted your casting but can try again.
-#highlight {Your casting is disrupted by the fighting! %1} {magenta}
+#highlight {Your casting is disrupted by the fighting!} {magenta}
 #nop You've disrupted your casting and will lose one round of gameplay.
-#highlight {You lost your concentration! %1} {magenta}
+#highlight {You lost your concentration!} {magenta}
 #nop Healing Cloud spell's duration has run out.
-#highlight {The cloud of light blinks one last time and then fades away. %1} {magenta}
+#highlight {The cloud of light blinks one last time and then fades away.} {magenta}
 #nop Your medal has gained affinity experience.
-#highlight {A gleaming silver medal warms up briefly, then cools down. %1} {magenta}
+#highlight {A gleaming silver medal warms up briefly, then cools down.} {magenta}
 #nop Omen spell duration has run out.
-#highlight {Your premonition of the future fades. %1} {magenta}
+#highlight {Your premonition of the future fades.} {magenta}
 #nop Regenerate spell duration has run out.
-#highlight {Your wounds stop healing. %1} {magenta}
+#highlight {Your wounds stop healing.} {magenta}
 #nop You have gained knowledge the skill causing this message.
-#highlight {You feel enlightened. %1} {cyan}
+#highlight {You feel enlightened.} {cyan}
 #nop You are ready to learn the skill causing this message.
-#highlight {You feel especially skillful today. %1} {cyan}        
+#highlight {You feel especially skillful today.} {cyan} 
 #nop Healing Wave spell duration has run out.
-#highlight {Your body stops tingling. %1} {magenta}
-#highlight {%0 has summoned you! %1} {magenta}     
+#highlight {Your body stops tingling.} {magenta}
+#highlight {%0 has summoned you!} {magenta} 
 #nop A good hit.
 #highlight {You massacre %1} {red}
 #nop More damage than massacre.
@@ -32,59 +32,56 @@
 
 #nop Negative affects that can be dispelled affecting you or others
 #nop Curse spell - negated by Remove Curse spell of equal or greater level
-#highlight {You feel very uncomfortable. %1} {cyan}
+#highlight {You feel very uncomfortable.} {cyan}
 #nop Ancient Curse spell - negated by Remove Curse spell of equal or greater level
-#highlight {You feel extremely uncomfortable. %1} {cyan}
+#highlight {You feel extremely uncomfortable.} {cyan}
 #nop Charm and Mind Control spells - negated by Dispel Magic
-#highlight {You fall under the influence of %0's magic. %1} {cyan}
+#highlight {You fall under the influence of %0's magic.} {cyan}
 #nop Entangle spell - negated by Free Action spell
-#highlight {You become entangled in the vines! %1} {cyan}
-#highlight {%0 becomes entangled in the vines! %1} {cyan}
+#highlight {You become entangled in the vines!} {cyan}
+#highlight {%0 becomes entangled in the vines!} {cyan}
 #nop Web spell - negated by Free Action spell
-#highlight {%0 throws webbing all over you! %1} {cyan} 
+#highlight {%0 throws webbing all over you!} {cyan} 
 #nop Blind and Sunray spells - negated by Cure Blind spell
-#highlight {%0 seems to be blinded! %1} {cyan}
-#highlight {You have been blinded! %1} {cyan}
+#highlight {%0 seems to be blinded!} {cyan}
+#highlight {You have been blinded!} {cyan}
 #nop Hold Person spell, Ice Storm spell, Zap skill - negated by Free Action spell
-#highlight {%0 freezes in place. %1} {cyan}
-#highlight {You freeze in place, unable to move. %1} {cyan}
+#highlight {%0 freezes in place.} {cyan}
+#highlight {You freeze in place, unable to move.} {cyan}
 #nop Paralysis spell - negated by Free Action spell
-#highlight {Your limbs freeze in place! %1} {cyan}
-#highlight {%0 is paralyzed! %1} {cyan}
+#highlight {Your limbs freeze in place!} {cyan}
+#highlight {%0 is paralyzed!} {cyan}
 #nop Feeblemind spell - negated by Heal spell
-#highlight {You feel your mind slip away. %1} {cyan}
+#highlight {You feel your mind slip away.} {cyan}
 
 #nop Affects that cannot be dispelled / loss of character usage or ability
 #nop Feeblemind after-effect. You have to re-memorize some of your spellbook at random.
-#highlight {You forgot something! %1} {yellow}
+#highlight {You forgot something!} {yellow}
 #nop Caused by Punch, Ram instinct (headbutt)
-#highlight {Your eyes cross and you stumble back. %1} {yellow}
+#highlight {Your eyes cross and you stumble back.} {yellow}
 #nop Caused by Throat Punch skill
-#highlight {Your larynx collapses, speaking will be difficult. %1} {yellow}
+#highlight {Your larynx collapses, speaking will be difficult.} {yellow}
 #nop Caused by Silence spell
-#highlight {You suddenly lose all feeling of your mouth and tongue. %1} {yellow}
-#highlight {%0 suddenly becomes very quiet. %1} {yellow}
+#highlight {You suddenly lose all feeling of your mouth and tongue.} {yellow}
+#highlight {%0 suddenly becomes very quiet.} {yellow}
 #nop Caused by Bash skill
-#highlight {You are sent sprawling as %0 crashes into you. %1} {yellow}
+#highlight {You are sent sprawling as %0 crashes into you.} {yellow}
 #nop Caused by Avenging Faith skill
-#highlight {%0 forces you to the ground. %1} {yellow}
+#highlight {%0 forces you to the ground.} {yellow}
 #nop Caused by Worg instinct (Thrash)
-#highlight {%0 gives you a good thrashing, forcing you to the ground. %1} {yellow}
+#highlight {%0 gives you a good thrashing, forcing you to the ground.} {yellow}
 #nop Caused by Charge skill
-#highlight {%0 charges into you and knocks you to the ground. %1} {yellow}
-#highlight {%0 swings madly at you with %1, knocking you to the ground. %1} {yellow}
+#highlight {%0 charges into you and knocks you to the ground.} {yellow}
+#highlight {%0 swings madly at you with %1, knocking you to the ground.} {yellow}
 #nop Caused by Earthquake spell
-#highlight {You are thrown to the ground by the force of the earthquake. %1} {yellow}
+#highlight {You are thrown to the ground by the force of the earthquake.} {yellow}
 #nop Caused by Power Word Stun, Nightmare (Nightmare is slightly different, but for all intents and purposes you can assume you're stunned)
-#highlight {--- YOU ARE STUNNED! --- %1} {yellow}
+#highlight {--- YOU ARE STUNNED! ---} {yellow}
 
 #nop Substitute messaging to ensure you see these important lines
 #sub {%0 disarms your weapon.}                                        {--- YOU HAVE BEEN DISARMED. GET YOUR WEAPON AND WIELD ---}
 #sub {%0 forces you to drop your weapon.}                             {--- YOU HAVE BEEN DISARMED. GET YOUR WEAPON AND WIELD ---}
 #sub {You succumb to the nightmare and fall into a deep, dark sleep.} {--- YOU ARE STUNNED! ---}
 #sub {You fall down, your ears ringing.}                              {--- YOU ARE STUNNED! ---}
-
-#highlight {You feel enlightened.} {light magenta}
-#highlight {You feel especially skillful today.} {light magenta}
 
 #class subs close
