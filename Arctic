@@ -62,6 +62,11 @@
 #if {&usesubs && $usesubs == 1} #read TINTIN_Arctic_Highlights_Subs.txt;
 #nop End defaults for Arctic Scripts;
 
+#nop Messaging forwarding
+#EVENT {SESSION DISCONNECTED} { #unvar sessionname; #write Preferences };
+#EVENT {SESSION CONNECTED} { #var sessionname {%0};};
+
+
 #nop Aliases for controlling two characters
 #nop This lets you send 'y' to the game as a prompt response if no argument is given.
 #alias {second_char_command}
@@ -111,9 +116,9 @@
 	#draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
 };
 
-#ACTION {^{?!Added|Format|Intersection|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
+#ACTION {^{?!Added|Format|Intersection|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-Z\s]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
 	#format {time} {%t} {%H:%M};
-	commwindow $time: %1%2%3%4
+   #ats {commwindow $sessionname $time: %1%2%3%4};
 };
 
 #class window close;
