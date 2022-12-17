@@ -66,9 +66,18 @@
 #sub {(Y/N)} {(uppercase Y/N)}
 
 #nop Aliases for controlling two characters
-#var {second_char_command} {#ic a}
-#var {both_chars_command} {#ic b}
-#alias {y} {$second_char_command}
+#nop This lets you send 'y' to the game as a prompt response if no argument is given.
+#alias {second_char_command}
+{
+	#if { "%1" == "" } { #send $second_char_alias; };
+	#else { #ic a %0; };
+};
+#alias {both_chars_command}
+{
+	#if { "%1" == "" } { #send $both_chars_alias; };
+	#else { #ic b %0 };
+};
+#alias {y} {second_char_command}
 #alias {v} {$both_chars_command}
 #var {second_char_alias} {y}
 #var {both_chars_alias} {v}
@@ -94,15 +103,15 @@
 
 #ALIAS {commwindow}
 {
-    #list window del 1;
-    #list window ins -1 {%0};
-    #draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
+	#list window del 1;
+	#list window ins -1 {%0};
+	#draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
 };
 
 #ALIAS {redraw}
 {
-   #showme Redrawing Tintin++ windows.;
-   #draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
+	#showme Redrawing Tintin++ windows.;
+	#draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
 };
 
 #ACTION {^{?!Added|Format|Intersection|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
