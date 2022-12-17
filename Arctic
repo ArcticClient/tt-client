@@ -32,6 +32,7 @@
 #var useactions {1};
 #var usesubs {1};
 #var autostand {1};
+#var autosplit {1};
 #read Preferences;
 #if {&usealiases && $usealiases == 1} #read Arctic_Aliases.txt;
 #if {&useactions && $useactions == 1} #read TINTIN_Arctic_Actions.txt;
@@ -106,6 +107,28 @@
 	#class subs size subs_size;
 	#switch {"%1"}
 		{
+		#case "autosplit"
+			{
+			#if {!&autosplit || $autosplit == 0}
+				{
+				#if {$useactions == 1}
+					{
+					#showme Enabling autosplit.;
+					#var autosplit 1;
+					#write Preferences;
+					};
+				#else
+					{
+					#showme Enable Arctic's default actions with \"arctic actions\" first.;
+					};
+				};
+			#else
+				{
+				#showme Disabling autosplit.;
+				#var autosplit 0;
+				#write Preferences;
+				};
+			};
 		#case "autostand"
 			{
 			#if {!&autostand || $autostand == 0}
@@ -313,6 +336,31 @@
 			#else #showme Hungry trigger disabled;
 			#if {&ticker && $ticker == 1} {#showme 10-second tick warning is enabled.};
 			#else #showme 10-second tick warning is disabled.;
+			#if {&autosplit && $autosplit == 1 && $useactions == 1}
+				{
+				#showme {Autosplit is enabled.};
+				};
+			#elseif {&autosplit && $autosplit == 0}
+				{
+				#showme {Autosplit is disabled.};
+				};
+			#elseif {$useactions == 0 || !&useactions}
+				{
+				#showme {Autosplit is disabled because Arctic's default actions are disabled.};
+				};
+			#elseif {!&autosplit}
+				{
+				#local actionssize 0;
+				#class actions size actionssize;
+				#if {$actionssize == 0}
+					{
+					#showme {Autosplit is undefined and Arctic actions are disabled anyways.};
+					};
+				#else
+					{
+					#showme {Autosplit variable is undefined.  Type 'arctic autosplit' to fix this.};
+					};
+				};
 			#if {&autostand && $autostand == 1 && $useactions == 1}
 				{
 				#showme {Autostand is enabled.};
@@ -340,7 +388,7 @@
 				};
 			#showme {Second character command: $second_char_alias};
 			#showme {Both characters command: $both_chars_alias};
-			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty/ticker/second/both/autostand>};
+			#showme {Syntax: arctic <aliases/actions/subs/hungry/thirsty/ticker/second/both/autostand/autosplit>};
 			};
 		};
 	#unvar alias_size;

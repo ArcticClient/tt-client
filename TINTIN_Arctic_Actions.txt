@@ -18,15 +18,18 @@
 #action {^%0 smiles as she finishes her meditation.}                         {#if {&ticker && $ticker == 1} {#tick {TICK} {#delay 50 #show <afc>*** 10 SECONDS TO TICK ***} {60}}}
 #nop This trigger loots coins from the most recent corpse.
 #action {^%0 is dead!}                                                       {get all.coins corpse}
-#nop This trigger splits coins that you pick up.
-#nop **WARNING** Getting coins from a container will cause this trigger to fire.
-#action {^There were %0 coins.}                                              {split %0}
 #nop Loss of fly spell on your character.
 #action {^You feel much heavier.}                                            {fly;fly}
 
-#nop autostand class
-#class autostand kill
-#class autostand open
+#class autosplit kill;
+#class autosplit open;
+#nop This trigger splits coins that you pick up.;
+#nop **WARNING** Getting coins from a container will cause this trigger to fire.;
+#action {^There were %0 coins.}                                              {#if {$autosplit == 1} split %0};
+#class autosplit close;
+
+#class autostand kill;
+#class autostand open;
 #nop This message is received when bashed.
 #action {^You are sent sprawling as %0 crashes into you.}                    {#if {$autostand == 1} stand}
 #nop This message is received when charged and put into sitting position.
