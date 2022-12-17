@@ -62,9 +62,6 @@
 #if {&usesubs && $usesubs == 1} #read TINTIN_Arctic_Highlights_Subs.txt;
 #nop End defaults for Arctic Scripts;
 
-#nop Fix for character creation
-#sub {(Y/N)} {(uppercase Y/N)}
-
 #nop Aliases for controlling two characters
 #nop This lets you send 'y' to the game as a prompt response if no argument is given.
 #alias {second_char_command}
