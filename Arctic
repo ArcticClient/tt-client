@@ -55,8 +55,8 @@
 	#else { #ic b %0 };
 };
 #class multi_commands close;
-#alias {y} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;$second_char_command};
-#alias {v} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;$both_chars_command};
+#alias {y} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;second_char_command %0};
+#alias {v} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;both_chars_command %0};
 #var {second_char_alias} {y};
 #var {both_chars_alias} {v};
 
