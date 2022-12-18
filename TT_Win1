@@ -1,6 +1,6 @@
-#port init ic 3001
-#alias {a} {#port send all %0}
-#alias {b} {#port send all %0;#main %0}
-#act {^<PORT> %0} {#main %0};
-#port call localhost 3002
-#sess main mud.arctic.org 2700 Arctic
+#port init ic 3001;
+#alias {a} {#port send all docommand %0};
+#alias {b} {#main %0;#port send all docommand %0};
+#act {^<PORT> docommand %0} {#main %0};
+#port call localhost 3002;
+#sess main mud.arctic.org 2700 Arctic;

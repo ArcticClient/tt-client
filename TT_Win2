@@ -1,4 +1,4 @@
 #port init ic 3002
-#action {^<PORT> %0} {#alt %0}
-#alias {a} {#port send all %0};
+#action {^<PORT> docommand %0} {#alt %0}
+#alias {a} {#port send all docommand %0};
 #sess alt mud.arctic.org 2700 Arctic

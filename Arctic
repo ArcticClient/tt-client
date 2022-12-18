@@ -47,12 +47,12 @@
 #alias {second_char_command}
 {
 	#if { "%1" == "" } { #send $second_char_alias; };
-	#else { #ic a %0; };
+	#else { #ic a %0};
 };
 #alias {both_chars_command}
 {
 	#if { "%1" == "" } { #send $both_chars_alias; };
-	#else { #ic b %0 };
+	#else { #ic b %0};
 };
 #class multi_commands close;
 #alias {y} {#nop Change this with the 'arctic' command in game, not in the Preferences file.;second_char_command %0};
@@ -96,6 +96,7 @@
 #ACTION {^{?!Added|Format|Intersection|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-Z\s]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
 	#format {time} {%t} {%H:%M};
    #ats {commwindow $sessionname $time: %1%2%3%4};
+	#ic a commwindow $sessionname $time: %1%2%3%4;
 };
 #class window close;
 
