@@ -1,7 +1,6 @@
 #port init ic 3001
-#act {^<PORT> Connection made to %0.} {#var con %0}
-#alias {a} {#port send $con %0}
-#alias {b} {#port send $con %0;#main %0}
-#act {^<PORT> %0} {%0};
+#alias {a} {#port send all %0}
+#alias {b} {#port send all %0;#main %0}
+#act {^<PORT> %0} {#main %0};
 #port call localhost 3002
 #sess main mud.arctic.org 2700 Arctic
