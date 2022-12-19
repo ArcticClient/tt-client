@@ -102,6 +102,7 @@
 };
 
 #ACTION {^{\^|\*\*|\*|\<|}{[a-zA-Z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
+	#local time {};
 	#format {time} {%t} {%H:%M};
    #ats {commwindow $sessionname $time: %1%2%3%4};
 	#ic a commwindow $sessionname $time: %1%2%3%4;
