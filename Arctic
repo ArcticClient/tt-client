@@ -4,10 +4,13 @@
 #nop Setup defaults for Arctic scripts;
 #CLASS defaults kill;
 #CLASS defaults open;
+#nop Change this if you want the 'enter' key to send the last command;
+#nop Note that this makes browsing paginated input (browse command, news, etc) difficult.
 #CONFIG {REPEAT ENTER} {OFF}
 #nop This prevents multiple colors on one line from breaking color
 #CONFIG {COLOR PATCH} {on}
-#alias setscreen {opt col $cols;redraw;#unticker screenupdate;};
+#nop This alias is used for automatically resizing/redrawing the screen.
+#ALIAS setscreen {opt col $cols;redraw;#unticker screenupdate;};
 #CLASS defaults close;
 #nop End default TinTin configuration;
 
@@ -24,7 +27,9 @@
 #class events close;
 
 #nop Defaults for Arctic Scripts;
-#alias {a1} {#session Arctic mud.arctic.org 2700}
+#nop If you want to change these, you should use the 'arctic' command in game;
+#nop If you want to use a hungry/thirsty command with multiple components, for example;
+#nop something like "get all.food pack;eat all.food", then change it in your Preferences file.
 #var hungrycommand {eat all.food};
 #var thirstycommand {drink all.water};
 #var ticker {1};
@@ -33,6 +38,7 @@
 #var usesubs {1};
 #var autostand {1};
 #var autosplit {1};
+#nop Read Preferences here so we can determine whether to load the defaults or not;
 #read Preferences;
 #if {&usealiases && $usealiases == 1} #read Arctic_Aliases.txt;
 #if {&useactions && $useactions == 1} #read TINTIN_Arctic_Actions.txt;
@@ -47,11 +53,13 @@
 #alias {second_char_command}
 {
 	#if { "%1" == "" } { #send $second_char_alias; };
+	#nop This is the actual command control the second character: #ic a %0;
 	#else { #ic a %0};
 };
 #alias {both_chars_command}
 {
 	#if { "%1" == "" } { #send $both_chars_alias; };
+	#nop This is the actual command to control both characters: #ic b %0;
 	#else { #ic b %0};
 };
 #class multi_commands close;
@@ -93,9 +101,10 @@
 	#draw white unicode rounded box 1 1 10 $cols $window[-10..-1];
 };
 
-#ACTION {^{?!Added|Format|Intersection|Syntax|Note|WARNING|Warning|Usage}{\^|\*\*|\*|\<|}{[a-zA-Z\s]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
+#ACTION {^{\^[a-zA-Z]+|\*\*[a-zA-Z]+|\*[a-zA-Z]+|\<[a-zA-Z]+}{:\s|\ssays\s'|\stells you\s'|\sshouts\s'|\syells\s'|\swhispers to you,\s'|\stells your group '}{?!added to your spell list}{.+}{\>|\*|}} {
 	#format {time} {%t} {%H:%M};
    #ats {commwindow $sessionname $time: %1%2%3%4};
+	#nop TODO add a format with padding here;
 	#ic a commwindow $sessionname $time: %1%2%3%4;
 };
 #class window close;
@@ -196,6 +205,7 @@
 				#showme {};
 				#showme Disabling 10-second tick warning.;
 				#var ticker 0;
+				#unticker TICK;
 				#write Preferences;
 				};
 			#else
