@@ -1,8 +1,8 @@
 #class actions kill
 #class actions open
 #nop Generic triggers. Automatic eat/drink, tick resets, coin loot and split, stand when bashed
-#action {^You are thirsty.}                                                  {drink all.water}
-#action {^You are hungry.}                                                  {eat all.food}
+#action {^You are thirsty.}                                                  {$thirstycommand}
+#action {^You are hungry.}                                                  {$hungrycommand}
 #nop Memorization messages of different classes, both yourself and others.
 #action {^Your studies complete, you close your spellbook with a smile.}     {#if {&ticker && $ticker == 1} {#tick {TICK} {#delay 50 #show <afc>*** 10 SECONDS TO TICK ***} {60}}}
 #action {^Your meditation finished, you put away your charms with a smile.}  {#if {&ticker && $ticker == 1} {#tick {TICK} {#delay 50 #show <afc>*** 10 SECONDS TO TICK ***} {60}}}
