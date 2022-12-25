@@ -105,35 +105,10 @@ Window 1 AND Window 2 say "I'm doing fine, thanks."
 ```
 
 # TinTin++ users (TinTin++ on Mac/Linux):
-Prerequisites: TinTin++, screen
 
-The 'screen' program is required for this configuration. MacOS provides this
-by default, but Linux users may need to install this separately.
-   - RHEL & derivatives (CentOS, Rocky, Fedora, etc): `yum install screen` or `dnf install screen`
-   - Debian & derivates (Ubuntu, etc): `apt-get install screen`
-   - https: //linuxize.com/post/how-to-use-linux-screen
-   - https: //phoenixnap.com/kb/how-to-use-linux-screen-with-commands
-
-The following instructions follow QWERTY keyboard standards:
-
-1. Open a terminal and run `screen`
-2. Split your screen session into two windows: press "Ctrl-A", then "|" (The "pipe" character is
-   found by holding Left Shift and pressing the Backslash ("\\") key, which is typically
-   below the Backspace key)
-3. Switch to new window: "Ctrl-A", then "Tab"
-4. Create a new shell: "Ctrl-A", then "C"
-5. Create a file named 'alt.log' with the command: `touch alt.log`
-6. Enter the command: `tail -f alt.log`
-7. Switch to main window: "Ctrl-A", then "Tab"
-8. Begin tt++ with the command: `tt++`
-9. Enter: `#session main mud.arctic.org 2700`
-10. Enter: `#session alt mud.arctic.org 2700`
-11. Enter: `#session main #read Arctic`
-12. Enter: `#session alt #read Arctic`
-13. Login as your alternate character.
-14. Enter: `#log append alt.log`
-15. Enter: `#session main`
-16. Login as your primary character.
+1. Open two terminal sessions.
+2. In the first session, start Tintin++ and type `#read TT_Win2`, then login with your alt.
+3. In the second session, start Tintin++ and type `#read TT_Win1`, then login with your main character.
 
 # Creating your own triggers, aliases, highlights, and substitutions
 
